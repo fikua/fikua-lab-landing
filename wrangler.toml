@@ -1,0 +1,14 @@
+# Cloudflare Workers (Static Assets) configuration
+# https://developers.cloudflare.com/workers/static-assets/
+#
+# Pure-static site: no build step, no Worker code. Cloudflare serves the
+# files in `directory` directly from its global edge cache.
+
+name = "fikua-lab-landing"
+compatibility_date = "2026-05-22"
+
+[assets]
+directory = "./"
+# If a request does not match any asset, serve shared/404.html (matches the
+# old nginx error_page behaviour).
+not_found_handling = "404-page"
