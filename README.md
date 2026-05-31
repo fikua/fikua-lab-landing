@@ -9,11 +9,9 @@ EUDI ARF playground. Served at **<https://lab.fikua.com>**.
 .
 ├── index.html      Landing page
 ├── style.css       Page styles
-├── app.js          Theme toggle + analytics consent hookup
+├── app.js          Theme toggle
 ├── favicon.svg
 └── shared/         Vendored assets shared across all *.lab.fikua.com frontends
-    ├── consent.css
-    ├── consent.js
     ├── favicon.svg
     ├── 404.html
     └── 50x.html
