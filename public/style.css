@@ -1,6 +1,7 @@
 /* ============================================
    Fikua Lab — Landing Page
-   Color system: Cobalt (#1A4C9C) + Vermilion (#E1241A) — Joan Miró
+   Color system: Joan Miró — vermilion #E1241A, cobalt #1A4C9C,
+   cadmium yellow #F6C915, black #1A1A1A on warm paper #FCFCFC.
    Shared neutrals with oriolcanades.com
    ============================================ */
 
@@ -9,11 +10,11 @@
     --accent: #1A4C9C;
     --accent-hover: #143b78;
     --accent-subtle: rgba(26, 76, 156, 0.08);
-    --berry: #E1241A;
-    --berry-hover: #a11445;
-    --berry-subtle: rgba(194, 24, 91, 0.08);
+    --vermilion: #E1241A;
+    --vermilion-hover: #b41b13;
+    --vermilion-subtle: rgba(225, 36, 26, 0.08);
 
-    --heading: #1B263B;
+    --heading: #1A1A1A;
     --text: #3A3A3C;
     --text-muted: #6B7280;
     --bg: #FCFCFC;
@@ -33,9 +34,9 @@
     --accent: #6FA0E8;
     --accent-hover: #9cc0f3;
     --accent-subtle: rgba(111, 160, 232, 0.1);
-    --berry: #F6C915;
-    --berry-hover: #f48fb1;
-    --berry-subtle: rgba(240, 98, 146, 0.1);
+    --vermilion: #F6C915;
+    --vermilion-hover: #f8d65a;
+    --vermilion-subtle: rgba(246, 201, 21, 0.12);
 
     --heading: #e2e8f0;
     --text: #cbd5e1;
@@ -103,12 +104,18 @@ h1, h2, h3 { color: var(--heading); line-height: 1.3; }
     justify-content: center;
     width: 28px;
     height: 28px;
-    background: var(--accent);
-    color: #fff;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.85rem;
 }
+
+.nav-logo svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* On the dark surface the black diagonals would vanish — lift them to paper
+   and brighten cobalt, per the brand system's on-dark rules. */
+[data-theme="dark"] .nav-logo svg line[stroke="#1A1A1A"] { stroke: #FCFCFC; }
+[data-theme="dark"] .nav-logo svg line[stroke="#1A4C9C"] { stroke: #3D7BD6; }
 
 .nav-links {
     display: flex;
@@ -158,9 +165,9 @@ h1, h2, h3 { color: var(--heading); line-height: 1.3; }
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--berry);
-    background: var(--berry-subtle);
-    border: 1px solid var(--berry);
+    color: var(--vermilion);
+    background: var(--vermilion-subtle);
+    border: 1px solid var(--vermilion);
     border-radius: 20px;
     padding: 0.3rem 0.9rem;
     margin-bottom: 1.5rem;
