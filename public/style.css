@@ -1,22 +1,22 @@
 /* ============================================
    Fikua Lab — Landing Page
-   Color system: Teal (#2A9D8F) + Berry (#c2185b)
+   Color system: Cobalt (#1A4C9C) + Vermilion (#E1241A) — Joan Miró
    Shared neutrals with oriolcanades.com
    ============================================ */
 
 /* --- Light mode (default) --- */
 :root {
-    --accent: #2A9D8F;
-    --accent-hover: #238578;
-    --accent-subtle: rgba(42, 157, 143, 0.08);
-    --berry: #c2185b;
+    --accent: #1A4C9C;
+    --accent-hover: #143b78;
+    --accent-subtle: rgba(26, 76, 156, 0.08);
+    --berry: #E1241A;
     --berry-hover: #a11445;
     --berry-subtle: rgba(194, 24, 91, 0.08);
 
     --heading: #1B263B;
     --text: #3A3A3C;
     --text-muted: #6B7280;
-    --bg: #ffffff;
+    --bg: #FCFCFC;
     --bg-alt: #f8f9fa;
     --surface: #ffffff;
     --border: #e5e7eb;
@@ -30,10 +30,10 @@
 
 /* --- Dark mode --- */
 [data-theme="dark"] {
-    --accent: #2dd4bf;
-    --accent-hover: #5eead4;
-    --accent-subtle: rgba(45, 212, 191, 0.1);
-    --berry: #f06292;
+    --accent: #6FA0E8;
+    --accent-hover: #9cc0f3;
+    --accent-subtle: rgba(111, 160, 232, 0.1);
+    --berry: #F6C915;
     --berry-hover: #f48fb1;
     --berry-subtle: rgba(240, 98, 146, 0.1);
 
@@ -424,15 +424,15 @@ section h2 {
 }
 
 .conf-btn-passed {
-    background: rgba(42, 157, 143, 0.12);
+    background: rgba(26, 76, 156, 0.12);
     color: var(--accent);
     border: 1px solid var(--accent);
     cursor: pointer;
 }
 
 .conf-btn-passed:hover {
-    background: rgba(42, 157, 143, 0.2);
-    box-shadow: 0 1px 4px rgba(42, 157, 143, 0.15);
+    background: rgba(26, 76, 156, 0.2);
+    box-shadow: 0 1px 4px rgba(26, 76, 156, 0.15);
     color: var(--accent);
 }
 
