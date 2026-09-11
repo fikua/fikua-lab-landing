@@ -1,7 +1,7 @@
-# Fikua Lab — Landing page
+# Fikua Digital Identity Lab — Landing page
 
-Landing page for the Fikua Lab, the OpenID Foundation conformance and
-EUDI ARF playground. Served at **<https://lab.fikua.com>**.
+Landing page for the Fikua Digital Identity Lab, the OpenID Foundation
+conformance and EUDI ARF playground. Served at **<https://lab.fikua.com>**.
 
 ## What lives here
 
