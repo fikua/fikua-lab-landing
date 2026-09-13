@@ -27,6 +27,7 @@
             </a>
             <div class="nav-links">
                 <a href="#systems">Systems</a>
+                <a href="#architecture">Architecture</a>
                 <a href="#what">What</a>
                 <a href="#how">Conformance</a>
                 <a href="#stack">Stack</a>
@@ -43,18 +44,20 @@
         <section class="hero">
             <h1>Learn digital identity<br>by <span class="highlight">building</span> it</h1>
             <p class="hero-sub">
-                A hands-on conformance testing platform for OpenID4VCI, OpenID4VP,
-                and HAIP — aligned with eIDAS 2.0 and the EUDI Architecture Reference Framework.
+                A hands-on lab where I implement every role of the EUDI Wallet ecosystem
+                from scratch — Issuer, Wallet, Verifier, Authorization Server, and Attestation
+                Registry — aligned with eIDAS 2.0, the EUDI Architecture Reference Framework,
+                and OpenID Foundation conformance suites.
             </p>
             <div class="hero-actions">
                 <a href="#systems" class="btn btn-primary">Explore the systems</a>
-                <a href="#what" class="btn btn-secondary">Learn more</a>
+                <a href="#what" class="btn btn-secondary">What is this lab</a>
             </div>
         </section>
 
         <section class="systems" id="systems">
             <h2>Live systems</h2>
-            <p class="section-sub">Each role runs as its own service. Open one directly.</p>
+            <p class="section-sub">Each role runs as its own independently deployed service. Open one directly.</p>
             <div class="systems-grid">
                 <a href="https://issuer.fikua.com" target="_blank" rel="noopener" class="system-card">
                     <div class="system-icon issuer-icon">
@@ -66,13 +69,13 @@
                     </div>
                     <span class="system-arrow">&rarr;</span>
                 </a>
-                <a href="https://lab.fikua.com/wallet" target="_blank" rel="noopener" class="system-card">
+                <a href="https://wallet.fikua.com" target="_blank" rel="noopener" class="system-card">
                     <div class="system-icon holder-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                     </div>
                     <div class="system-info">
                         <strong>Wallet</strong>
-                        <span>lab.fikua.com/wallet</span>
+                        <span>wallet.fikua.com</span>
                     </div>
                     <span class="system-arrow">&rarr;</span>
                 </a>
@@ -81,8 +84,18 @@
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
                     <div class="system-info">
-                        <strong>Verifier</strong>
+                        <strong>Verifier + Authorization Server</strong>
                         <span>idp.fikua.com</span>
+                    </div>
+                    <span class="system-arrow">&rarr;</span>
+                </a>
+                <a href="https://attestation-registry.fikua.com" target="_blank" rel="noopener" class="system-card">
+                    <div class="system-icon registry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    </div>
+                    <div class="system-info">
+                        <strong>Attestation Registry</strong>
+                        <span>attestation-registry.fikua.com</span>
                     </div>
                     <span class="system-arrow">&rarr;</span>
                 </a>
@@ -99,19 +112,94 @@
             </div>
         </section>
 
+        <section class="architecture" id="architecture">
+            <h2>How the ecosystem fits together</h2>
+            <p class="section-sub">Five independent services, each owning one role of the EUDI Wallet architecture. No monolith — every box is its own deployable.</p>
+            <div class="arch-diagram">
+                <svg viewBox="0 0 760 380" xmlns="http://www.w3.org/2000/svg" class="arch-svg" role="img" aria-label="Architecture diagram: Wallet requests credentials from the Issuer over OID4VCI and presents them to the Verifier over OID4VP. Issuer and Verifier both read credential type definitions from the Attestation Registry and both call the Digital Signature Service to sign. The Verifier doubles as an OAuth2 Authorization Server, issuing access tokens the Issuer trusts.">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                            <path d="M0 0L10 5L0 10z" class="arch-arrowhead"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Wallet -->
+                    <rect x="30" y="150" width="150" height="70" rx="10" class="arch-box arch-box--holder"/>
+                    <text x="105" y="180" class="arch-label">Wallet</text>
+                    <text x="105" y="198" class="arch-sublabel">wallet.fikua.com</text>
+
+                    <!-- Issuer -->
+                    <rect x="305" y="40" width="150" height="70" rx="10" class="arch-box arch-box--issuer"/>
+                    <text x="380" y="70" class="arch-label">Issuer</text>
+                    <text x="380" y="88" class="arch-sublabel">issuer.fikua.com</text>
+
+                    <!-- IdP: Verifier + AS -->
+                    <rect x="305" y="260" width="170" height="80" rx="10" class="arch-box arch-box--verifier"/>
+                    <text x="390" y="288" class="arch-label">Verifier + AS</text>
+                    <text x="390" y="306" class="arch-sublabel">idp.fikua.com</text>
+                    <text x="390" y="322" class="arch-sublabel">OID4VP · OAuth2</text>
+
+                    <!-- Attestation Registry -->
+                    <rect x="580" y="40" width="160" height="70" rx="10" class="arch-box arch-box--registry"/>
+                    <text x="660" y="70" class="arch-label">Attestation Registry</text>
+                    <text x="660" y="88" class="arch-sublabel">credential schemas</text>
+
+                    <!-- DSS -->
+                    <rect x="580" y="260" width="160" height="80" rx="10" class="arch-box arch-box--dss"/>
+                    <text x="660" y="288" class="arch-label">Signature Service</text>
+                    <text x="660" y="306" class="arch-sublabel">CSC v1/v2 (DSS)</text>
+                    <text x="660" y="322" class="arch-sublabel">Java, remote signing</text>
+
+                    <!-- Wallet -> Issuer (OID4VCI) -->
+                    <path d="M120 150 L340 112" class="arch-edge" marker-end="url(#arrow)"/>
+                    <text x="190" y="120" class="arch-edge-label">OID4VCI · credential request</text>
+
+                    <!-- Issuer -> Wallet (credential) -->
+                    <path d="M330 112 L140 150" class="arch-edge arch-edge--reply" marker-end="url(#arrow)"/>
+
+                    <!-- Wallet -> Verifier (OID4VP) -->
+                    <path d="M150 220 L360 258" class="arch-edge" marker-end="url(#arrow)"/>
+                    <text x="175" y="248" class="arch-edge-label">OID4VP · presentation</text>
+
+                    <!-- Verifier(AS) -> Issuer: access tokens -->
+                    <path d="M380 258 L380 112" class="arch-edge arch-edge--token" marker-end="url(#arrow)"/>
+                    <text x="392" y="190" class="arch-edge-label" transform="rotate(-90 392 190)">access tokens</text>
+
+                    <!-- Issuer -> Registry -->
+                    <path d="M455 68 L578 68" class="arch-edge arch-edge--data" marker-end="url(#arrow)"/>
+
+                    <!-- Verifier -> Registry -->
+                    <path d="M460 270 Q 560 170 640 112" class="arch-edge arch-edge--data" marker-end="url(#arrow)"/>
+                    <text x="560" y="185" class="arch-edge-label">schema lookup</text>
+
+                    <!-- Issuer -> DSS -->
+                    <path d="M460 100 Q 560 190 578 268" class="arch-edge arch-edge--sign" marker-end="url(#arrow)"/>
+
+                    <!-- Verifier -> DSS -->
+                    <path d="M475 296 L578 296" class="arch-edge arch-edge--sign" marker-end="url(#arrow)"/>
+                    <text x="500" y="288" class="arch-edge-label">sign</text>
+                </svg>
+            </div>
+            <p class="arch-note">The Verifier and the OAuth2 Authorization Server live in the same service (<code>idp.fikua.com</code>) because in the OID4VCI authorization-code flow, the AS authenticates the citizen by verifying a wallet presentation — the two roles share state by design, not by accident.</p>
+        </section>
+
         <section class="roles" id="what">
-            <h2>Three roles, one platform</h2>
-            <p class="section-sub">Fikua Lab implements the full credential lifecycle — issue, hold, and verify — following the OpenID Foundation specifications.</p>
+            <h2>What is the Digital Identity Lab</h2>
+            <p class="section-sub">
+                A learning lab I built and run alone to understand the EUDI Wallet ecosystem
+                from the inside — not by reading the ARF, but by implementing every role in it
+                and validating each one against the OpenID Foundation conformance suite.
+            </p>
             <div class="roles-grid">
                 <div class="role-card">
                     <div class="role-icon issuer-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
                     </div>
                     <h3>Issuer</h3>
-                    <p>Creates and signs verifiable credentials using OID4VCI. Supports pre-authorization and authorization code flows with SD-JWT VC format.</p>
+                    <p>Issues EUDI PID as SD-JWT VC and mdoc via OID4VCI. Reads credential type definitions from the Attestation Registry instead of hardcoding them, and calls the Signature Service to sign every credential.</p>
                     <ul class="role-specs">
                         <li>OID4VCI 1.0</li>
-                        <li>SD-JWT VC</li>
+                        <li>SD-JWT VC / mdoc</li>
                         <li>DPoP / PAR / PKCE</li>
                     </ul>
                 </div>
@@ -120,7 +208,7 @@
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                     </div>
                     <h3>Wallet</h3>
-                    <p>Stores credentials and presents them selectively. Handles holder binding and selective disclosure following the HAIP profile.</p>
+                    <p>Holds credentials in the browser and presents them selectively. Talks to the Issuer and the Verifier directly — holder binding and selective disclosure following the HAIP profile.</p>
                     <ul class="role-specs">
                         <li>Holder binding</li>
                         <li>Selective disclosure</li>
@@ -131,12 +219,24 @@
                     <div class="role-icon verifier-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
-                    <h3>Verifier</h3>
-                    <p>Validates credential presentations via OID4VP with direct_post response mode. Supports X.509 certificate trust chains.</p>
+                    <h3>Verifier + Authorization Server</h3>
+                    <p>Validates credential presentations via OID4VP, and doubles as the OAuth2 Authorization Server for the OID4VCI authorization-code flow — a citizen authenticates by presenting a credential.</p>
                     <ul class="role-specs">
-                        <li>OID4VP 1.0</li>
-                        <li>DCQL</li>
+                        <li>OID4VP 1.0 / DCQL</li>
+                        <li>OAuth2 AS · RFC 9068</li>
                         <li>x509_san_dns / x509_hash</li>
+                    </ul>
+                </div>
+                <div class="role-card">
+                    <div class="role-icon registry-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    </div>
+                    <h3>Attestation Registry</h3>
+                    <p>A catalogue of attestation/credential types per the ARF and ETSI TS 119 472 — claims, display metadata, and SD-JWT VC Type Metadata. Not a trust registry: it defines <em>what</em> a credential looks like, so Issuer and Verifier don't hardcode schemas.</p>
+                    <ul class="role-specs">
+                        <li>ARF 3.0</li>
+                        <li>ETSI TS 119 472</li>
+                        <li>SD-JWT VC Type Metadata</li>
                     </ul>
                 </div>
             </div>
@@ -250,31 +350,39 @@
 
         <section class="stack" id="stack">
             <h2>Minimal, intentional stack</h2>
-            <p class="section-sub">No frameworks, no magic. Every line of code is a learning opportunity.</p>
+            <p class="section-sub">No frameworks, no magic. Issuer, Verifier/AS, and Attestation Registry are standalone Go services; every line of protocol code is a learning opportunity.</p>
             <div class="stack-grid">
                 <div class="stack-item">
-                    <strong>Java 25</strong>
-                    <span>Records, sealed interfaces, virtual threads</span>
+                    <strong>Go</strong>
+                    <span>Issuer, Verifier/AS, and Attestation Registry — standard library first</span>
                 </div>
                 <div class="stack-item">
-                    <strong>Javalin</strong>
-                    <span>Lightweight HTTP — no annotations, no reflection</span>
+                    <strong>TypeScript + Vite</strong>
+                    <span>Wallet PWA, runs entirely in the browser</span>
                 </div>
                 <div class="stack-item">
-                    <strong>PostgreSQL 17</strong>
-                    <span>JSONB profiles, Flyway migrations</span>
+                    <strong>PostgreSQL</strong>
+                    <span>Credential offers, sessions, attestation schemas</span>
                 </div>
                 <div class="stack-item">
-                    <strong>nimbus-jose-jwt</strong>
+                    <strong>go-jose / jwx</strong>
                     <span>JWT, JWK, SD-JWT, DPoP token handling</span>
                 </div>
                 <div class="stack-item">
-                    <strong>Docker Compose</strong>
+                    <strong>Docker Compose + Traefik</strong>
                     <span>Single-command deployment on EU VPS</span>
                 </div>
                 <div class="stack-item">
                     <strong>X.509 PKI</strong>
                     <span>eIDAS-aligned certificate chain, no DIDs</span>
+                </div>
+                <div class="stack-item">
+                    <strong>Java 25 + Spring Boot</strong>
+                    <span>Digital Signature Service — CSC v1/v2 remote signing (Go port planned)</span>
+                </div>
+                <div class="stack-item">
+                    <strong>Shared Go CSC client</strong>
+                    <span>crypto.Signer adapter used by Issuer and Verifier to call the Signature Service</span>
                 </div>
             </div>
         </section>
@@ -287,7 +395,7 @@
                     I build production identity systems at <strong>Altia</strong> and actively follow standards at the <strong>OpenID Foundation</strong>.
                 </p>
                 <p>
-                    Fikua Lab is where I learn by doing. Instead of just reading specs, I implement them — and validate my understanding against the OIDF conformance suite.
+                    Fikua Lab is where I learn by doing. Instead of just reading the ARF, I implement every role of the ecosystem myself — Issuer, Wallet, Verifier, Authorization Server, Attestation Registry — and validate each one against the OIDF conformance suite.
                     Every test passed is a concept internalized.
                 </p>
                 <p class="about-tagline">Where product vision meets technical depth.</p>
